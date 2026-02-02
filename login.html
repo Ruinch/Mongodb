@@ -2,16 +2,62 @@
 <html>
 <head>
     <link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8">
+    <title>Login</title>
+    <link rel="stylesheet" href="style.css">
     </head>
 <body>
-<h2>Login</h2>
+    <meta charset="UTF-8">
+    <title>Login</title>
+<body>
 
 <div class="container">
-    <h2>Login</h2>
-    <input id="email" placeholder="Email">
-    <input id="password" placeholder="Password" type="password">
-    <button onclick="login()">Login</button>
+
+    <!-- Navigation -->
+    <nav>
+        <a href="index.html">Browse Courses</a>
+        <a href="add-course.html">Create Course</a>
+        <a href="courses.html">All Courses</a>
+        <a href="login.html">Login</a>
+    </nav>
+
+    <h2>Welcome Back</h2>
+
+    <div class="card">
+        <input id="email" placeholder="Email">
+        <input id="password" type="password" placeholder="Password">
+        <button onclick="login()">Login</button>
+    </div>
+
 </div>
+
+<script>
+    function login() {
+        fetch("http://localhost:5000/api/auth/login", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                email: document.getElementById("email").value,
+                password: document.getElementById("password").value
+            })
+        })
+            .then(res => res.json())
+            .then(data => {
+                if (data.token) {
+                    localStorage.setItem("token", data.token);
+                    alert("Login successful!");
+                    window.location.href = "courses.html";
+                } else {
+                    alert(data.error || "Login failed");
+                }
+            });
+    }
+</script>
+
+</body>
+</html>
 
 <script>
 async function login() {
