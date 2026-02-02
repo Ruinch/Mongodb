@@ -12,7 +12,40 @@
 
   <h3>2) My Summary (requires login)</h3>
   <pre id="mySummary">Loading...</pre>
+  <div class="container">
+    <h2>Analytics</h2>
 
+    <div class="analytics">
+      <div class="stat">
+        <h3>Total Courses</h3>
+        <p id="totalCourses"></p>
+      </div>
+
+      <div class="stat">
+        <h3>Average Price</h3>
+        <p id="avgPrice"></p>
+      </div>
+
+      <div class="stat">
+        <h3>Total Lessons</h3>
+        <p id="totalLessons"></p>
+      </div>
+    </div>
+  </div>
+
+  <div class="container">
+
+    <nav>
+      <a href="courses.html">All Courses</a>
+      <a href="my-courses.html">My Courses</a>
+      <a href="add-course.html">Add Course</a>
+      <a href="analytics.html">Analytics</a>
+    </nav>
+
+    <h2>Analytics</h2>
+
+    <!-- analytics blocks -->
+  </div>
   <script>
     // 1) by-category (без токена)
     fetch("http://localhost:5000/api/analytics/by-category")
