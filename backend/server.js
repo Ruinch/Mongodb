@@ -3,6 +3,10 @@ const express = require("express");
 const cors = require("cors");
 const path = require("path");
 const connectDB = require("./config/db");
+const path = require("path");
+
+app.use(express.static(path.join(__dirname, "../frontend")));
+
 
 const app = express();
 
@@ -10,9 +14,6 @@ connectDB();
 
 app.use(cors());
 app.use(express.json());
-
-// 🔥 раздаём фронтенд
-app.use(express.static(path.join(__dirname, "../frontend")));
 
 // 🔥 главная страница
 app.get("/", (req, res) => {
