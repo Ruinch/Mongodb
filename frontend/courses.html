@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<body>
+<h2>All Courses</h2>
+<div id="courses"></div>
+
+<script>
+fetch("http://localhost:5000/api/courses")
+  .then(res => res.json())
+  .then(data => {
+    data.forEach(c => {
+      courses.innerHTML += `
+        <p>
+          ${c.title} - ${c.price}$
+          <a href="course.html?id=${c._id}">Open</a>
+        </p>
+      `;
+    });
+  });
+</script>
+</body>
+</html>

@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<body>
+<h2>Edit Course</h2>
+
+<input id="title">
+<input id="price">
+<button onclick="update()">Save</button>
+
+<script>
+const id = new URLSearchParams(window.location.search).get("id");
+
+function update() {
+  fetch(`http://localhost:5000/api/courses/${id}`, {
+    method: "PUT",
+    headers: {
+      "Content-Type": "application/json",
+      "Authorization": "Bearer " + localStorage.getItem("token")
+    },
+    body: JSON.stringify({
+      title: title.value,
+      price: price.value
+    })
+  });
+}
+</script>
+</body>
+</html>

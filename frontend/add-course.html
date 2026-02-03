@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<body>
+<h2>Add Course</h2>
+
+<input id="title" placeholder="Title"><br>
+<input id="category" placeholder="Category"><br>
+<input id="price" type="number"><br>
+
+<button onclick="add()">Add</button>
+
+<script>
+async function add() {
+  await fetch("http://localhost:5000/api/courses", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      "Authorization": "Bearer " + localStorage.getItem("token")
+    },
+    body: JSON.stringify({
+      title: title.value,
+      category: category.value,
+      price: price.value
+    })
+  });
+
+  alert("Course created");
+}
+</script>
+</body>
+</html>

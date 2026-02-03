@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<h2>My Courses</h2>
+<div id="list"></div>
+<pre id="status"></pre>
+
+<script>
+const token = localStorage.getItem("token");
+
+if (!token) {
+  status.textContent = "No token found. Please login first.";
+} else {
+  fetch("http://localhost:5000/api/courses/my", {
+    headers: { "Authorization": "Bearer " + token }
+  })
+  .then(async res => {
+    const data = await res.json();
+    if (!res.ok) throw new Error(JSON.stringify(data));
+    return data;
+  })
+  .then(courses => {
+    if (courses.length === 0) {
+      status.textContent = "No courses found for this user. Create a course first.";
+      return;
+    }
+    courses.forEach(c => {
+      list.innerHTML += `
+        <p>
+          ${c.title} - ${c.price}$
+          <a href="edit-course.html?id=${c._id}">Edit</a>
+        </p>
+      `;
+    });
+  })
+  .catch(err => {
+    status.textContent = "Error: " + err.message;
+  });
+}
+</script>
+
+</body>
+</html>
