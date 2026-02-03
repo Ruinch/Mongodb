@@ -9,6 +9,11 @@ connectDB();
 app.use(cors());
 app.use(express.json());
 
+app.use(express.static(path.join(__dirname, 'frontend')));
+app.get('/', (req, res) => {
+  res.sendFile(path.join(__dirname, 'frontend', 'index.html'));
+});
+
 app.use("/api/auth", require("./routes/authRoutes"));
 app.use("/api/courses", require("./routes/courseRoutes"));
 app.use("/api/analytics", require("./routes/analyticsRoutes"));
